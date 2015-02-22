@@ -1,0 +1,11 @@
+#!/system/bin/sh
+# Partition mount
+mount -o remount,rw -t auto /system
+# Enable swap
+if [ ! -e /system/swap.file ]
+then 
+dd if=/dev/zero of=/system/swap.file bs=1048576 count=200
+fi
+mkswap /system/swap.file
+swapon /system/swap.file
+exit
